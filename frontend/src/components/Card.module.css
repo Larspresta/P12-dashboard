@@ -1,0 +1,22 @@
+.card {
+  width: 300px;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.cardData {
+  margin: 0;
+}
+
+.cardData p {
+  margin: 0;
+}
+
+.cardData h2 {
+  margin: 0;
+}
