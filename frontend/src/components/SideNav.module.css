@@ -1,0 +1,26 @@
+.sideNav {
+  width: 6rem;
+  position: fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 90svh;
+  background-color: black;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.iconContainer img {
+  height: 55px;
+}
+
+.sideNav p {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  color: white;
+}
