@@ -1,0 +1,11 @@
+.speed {
+  background-color: #e60000;
+  border-radius: 5px;
+}
+
+.speed h3 {
+  width: 150px;
+  margin-left: 30px;
+  color: white;
+  font-weight: 400;
+}

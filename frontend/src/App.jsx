@@ -1,8 +1,12 @@
-import "./App.css";
+import styles from "./App.module.css";
+import DailyActivity from "./components/DailyActivity";
 import Card from "./components/Card";
 import PageNav from "./components/PageNav";
 import SideNav from "./components/SideNav";
 import User from "./components/User";
+import Speed from "./components/Speed";
+import TrainingEffects from "./components/TrainingEffects";
+import Score from "./components/Score";
 
 function App() {
   return (
@@ -12,8 +16,12 @@ function App() {
       <User />
       <main>
         <section>
-          <h1>neaovne meoamrgomerog aeomrvboeam</h1>
-          <h1>neaovne meoamrgomerog aeomrvboeam</h1>
+          <DailyActivity />
+          <div className={styles.trainingCharts}>
+            <Speed />
+            <TrainingEffects />
+            <Score />
+          </div>
         </section>
         <aside>
           <Card />
