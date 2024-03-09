@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./App.module.css";
 import DailyActivity from "./components/DailyActivity";
 import Card from "./components/Card";
@@ -9,11 +10,17 @@ import TrainingEffects from "./components/TrainingEffects";
 import Score from "./components/Score";
 
 function App() {
+  const [userId, setUserId] = useState(12);
+
+  function handleSetUserId(e) {
+    setUserId(Number(e.target.value));
+  }
+
   return (
     <>
       <PageNav />
       <SideNav />
-      <User />
+      <User userId={userId} />
       <main>
         <section>
           <DailyActivity />
@@ -24,12 +31,18 @@ function App() {
           </div>
         </section>
         <aside>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card userId={userId} keyDataType="calorieCount" />
+          <Card userId={userId} keyDataType="proteinCount" />
+          <Card userId={userId} keyDataType="carbohydrateCount" />
+          <Card userId={userId} keyDataType="lipidCount" />
         </aside>
       </main>
+      <div className={styles.userSelect}>
+        <select name="user" onChange={handleSetUserId} value={userId}>
+          <option value="12">Karl</option>
+          <option value="18">Cecilia</option>
+        </select>
+      </div>
     </>
   );
 }

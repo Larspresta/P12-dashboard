@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000";
 
-export const GetUser = async (userId) => {
+export const GetUserMainInfo = async (userId) => {
   try {
     const res = await axios.get(`${API_URL}/user/${userId}`);
     return res.data;
