@@ -23,7 +23,7 @@ function App() {
       <User userId={userId} />
       <main>
         <section>
-          <DailyActivity />
+          <DailyActivity userId={userId} />
           <div className={styles.trainingCharts}>
             <Speed />
             <TrainingEffects />

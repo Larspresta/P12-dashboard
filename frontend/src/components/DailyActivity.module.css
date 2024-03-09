@@ -1,0 +1,11 @@
+.activity {
+  width: 95%;
+  background: var(--color-ligth--1);
+  border-radius: 5px;
+}
+
+.activity h3 {
+  position: relative;
+  top: 2rem;
+  left: 2rem;
+}

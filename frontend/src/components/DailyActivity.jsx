@@ -1,6 +1,10 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { useEffect, useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import { GetUserActivity } from "../../apiService";
 
-const data = [
+import styles from "./DailyActivity.module.css";
+
+/* const data = [
   {
     name: "Page A",
     uv: 4000,
@@ -43,28 +47,59 @@ const data = [
     pv: 4300,
     amt: 2100,
   },
-];
+]; */
 
-export default function DailyActivity() {
+export default function DailyActivity({ userId }) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    GetUserActivity(userId)
+      .then((userActivity) => {
+        console.log(userActivity);
+        setData(userActivity.data.sessions);
+      })
+      .catch((error) => console.log(error));
+  }, [userId]);
+
   return (
-    <BarChart
-      width={800}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" vertical={false} />
-      <XAxis dataKey="name" />
-      <YAxis orientation="right" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#282D30" />
-      <Bar dataKey="uv" fill="#E60000" />
-    </BarChart>
+    <div className={styles.activity}>
+      <h3>Daily activity</h3>
+      <BarChart
+        width={800}
+        height={300}
+        data={data}
+        margin={{
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 25,
+        }}
+      >
+        <XAxis dataKey="day" tickFormatter={(value, index) => index + 1} tickLine={false} />
+        <YAxis
+          yAxisId="left"
+          orientation="left"
+          domain={["dataMin - 2", "dataMax + 2"]}
+          axisLine={false}
+          tickLine={false}
+        />
+        <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} />
+        <Tooltip />
+        <Legend
+          verticalAlign="top"
+          align="right"
+          wrapperStyle={{
+            position: "absolute",
+            top: "-1rem",
+            paddingBottom: "20px",
+            paddingRight: "20px",
+          }}
+          iconType="circle"
+        />
+        <Bar yAxisId="left" dataKey="kilogram" fill="#282D30" barSize={10} />
+
+        <Bar yAxisId="right" dataKey="calories" fill="#E60000" barSize={10} />
+      </BarChart>
+    </div>
   );
 }
