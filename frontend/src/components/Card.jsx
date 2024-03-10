@@ -14,7 +14,6 @@ function Card({ userId, keyDataType }) {
   useEffect(() => {
     GetUserMainInfo(userId)
       .then((userData) => {
-        console.log(userData);
         setData(userData.data.keyData[keyDataType]);
       })
       .catch((error) => console.error(error));

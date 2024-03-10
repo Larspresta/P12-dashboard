@@ -25,9 +25,9 @@ function App() {
         <section>
           <DailyActivity userId={userId} />
           <div className={styles.trainingCharts}>
-            <Speed />
-            <TrainingEffects />
-            <Score />
+            <Speed userId={userId} />
+            <TrainingEffects userId={userId} />
+            <Score userId={userId} />
           </div>
         </section>
         <aside>

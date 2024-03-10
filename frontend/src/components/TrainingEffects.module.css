@@ -1,0 +1,8 @@
+.performance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: var(--color-dark--1);
+  border-radius: 5px;
+}

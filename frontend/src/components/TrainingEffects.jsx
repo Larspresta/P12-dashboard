@@ -1,51 +1,49 @@
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import { useEffect, useState } from "react";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from "recharts";
+import { GetUserPerformance } from "../../apiService";
+import styles from "./TrainingEffects.module.css";
+import PropTypes from "prop-types";
 
-const data = [
-  {
-    subject: "Intensity",
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: "Speed",
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "Strength",
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "Endurance",
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: "Energy",
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: "Cardio",
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
-];
+export default function TrainingEffects({ userId }) {
+  const [performanceData, setPerformanceData] = useState(null);
 
-export default function TrainingEffects() {
+  useEffect(() => {
+    GetUserPerformance(userId)
+      .then((response) => {
+        const { kind, data: performanceData } = response.data;
+        console.log(kind, performanceData);
+
+        const structuredData = performanceData.map((item) => ({
+          ...item,
+          kind: kind[item.kind],
+        }));
+
+        setPerformanceData(structuredData);
+        console.log(structuredData);
+      })
+      .catch((error) => console.error(error));
+  }, [userId]);
+
+  console.log(performanceData);
+
   return (
-    <RadarChart cx={300} cy={250} outerRadius={150} width={500} height={500} data={data}>
-      <PolarGrid />
-      <PolarAngleAxis dataKey="subject" />
-      <PolarRadiusAxis />
-      <Radar name="Mike" dataKey="A" stroke="#FF0101" fill="#FF0101" fillOpacity={0.6} />
-    </RadarChart>
+    <div className={styles.performance}>
+      <RadarChart
+        cx="48%"
+        cy="50%"
+        outerRadius="60%"
+        width={300}
+        height={300}
+        data={performanceData}
+      >
+        <PolarGrid radialLines={false} />
+        <PolarAngleAxis dataKey="kind" tick={{ fill: "white", fontSize: "0.9rem" }} />
+        <Radar name="Mike" dataKey="value" stroke="#FF0101" fill="#FF0101" fillOpacity={0.8} />
+      </RadarChart>
+    </div>
   );
 }
+
+TrainingEffects.propTypes = {
+  userId: PropTypes.number,
+};

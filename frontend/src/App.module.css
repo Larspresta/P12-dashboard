@@ -13,14 +13,15 @@ main {
 }
 
 section {
-  width: 900px;
+  width: 1200px;
 }
 
 .trainingCharts {
-  width: 1000px;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .userSelect {

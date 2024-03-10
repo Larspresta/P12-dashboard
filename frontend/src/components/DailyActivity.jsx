@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import { GetUserActivity } from "../../apiService";
 
+import PropTypes from "prop-types";
+
 import styles from "./DailyActivity.module.css";
 
 /* const data = [
@@ -55,7 +57,6 @@ export default function DailyActivity({ userId }) {
   useEffect(() => {
     GetUserActivity(userId)
       .then((userActivity) => {
-        console.log(userActivity);
         setData(userActivity.data.sessions);
       })
       .catch((error) => console.log(error));
@@ -65,7 +66,7 @@ export default function DailyActivity({ userId }) {
     <div className={styles.activity}>
       <h3>Daily activity</h3>
       <BarChart
-        width={800}
+        width={1100}
         height={300}
         data={data}
         margin={{
@@ -97,9 +98,11 @@ export default function DailyActivity({ userId }) {
           iconType="circle"
         />
         <Bar yAxisId="left" dataKey="kilogram" fill="#282D30" barSize={10} />
-
         <Bar yAxisId="right" dataKey="calories" fill="#E60000" barSize={10} />
       </BarChart>
     </div>
   );
 }
+DailyActivity.propTypes = {
+  userId: PropTypes.number.isRequired,
+};

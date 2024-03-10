@@ -1,69 +1,73 @@
 import { AreaChart, Area, XAxis, Tooltip } from "recharts";
+import { useEffect, useState } from "react";
 import styles from "./Speed.module.css";
-const data = [
-  {
-    name: "L",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "M",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "M",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "J",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "V",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "S",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "D",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { GetUserSessions } from "../../apiService";
+import PropTypes from "prop-types";
 
-export default function Speed() {
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "10px",
+          textAlign: "center",
+        }}
+      >
+        <p>{payload[0].value} mins</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+export default function Speed({ userId }) {
+  const [data, setData] = useState(null);
+
+  const weekdayLetters = ["S", "M", "T", "W", "T", "F", "S"];
+
+  useEffect(() => {
+    GetUserSessions(userId)
+      .then((userActivity) => {
+        setData(userActivity.data.sessions);
+      })
+      .catch((error) => console.log(error));
+  }, [userId]);
+
   return (
     <div className={styles.speed}>
       <h3>Average speed of your sessions</h3>
       <AreaChart
         width={300}
-        height={300}
+        height={200}
         data={data}
         margin={{
-          top: 40,
-          right: 0,
-          left: 0,
-          bottom: 0,
+          top: 0,
+          right: 20,
+          left: 20,
+          bottom: 20,
         }}
       >
-        <XAxis dataKey="name" />
-        <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="white" fill="#e60000" />
+        <XAxis
+          dataKey="day"
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={(index) => weekdayLetters[index - 1]}
+          tick={{ fill: "white" }}
+        />
+        <Tooltip content={<CustomTooltip />} />
+        <Area type="monotone" dataKey="sessionLength" stroke="white" fill="#e60000" />
       </AreaChart>
     </div>
   );
 }
+
+Speed.propTypes = {
+  userId: PropTypes.number.isRequired,
+};
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.arrayOf(PropTypes.object),
+};
