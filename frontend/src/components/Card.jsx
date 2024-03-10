@@ -8,6 +8,15 @@ import iconLipids from "../assets/fat-icon.svg";
 import { useEffect, useState } from "react";
 import { GetUserMainInfo } from "../../apiService.js";
 
+/**
+ * styled card component to display user's nutritional data and corresponding icon
+ *
+ * @param {object} props
+ * @param {number} props.userId ID to get user nutrition data
+ * @param {string} props.keyDataType nutrition data type e.g 'calorieCount'
+ * @returns {React.ReactElement} Card component to display user specific nutrition data
+ */
+
 function Card({ userId, keyDataType }) {
   const [data, setData] = useState(null);
 
@@ -55,7 +64,7 @@ function Card({ userId, keyDataType }) {
 }
 
 Card.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.number.isRequired, // required to get user data
   keyDataType: PropTypes.string,
 };
 

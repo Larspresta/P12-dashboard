@@ -9,6 +9,12 @@ import Speed from "./components/Speed";
 import TrainingEffects from "./components/TrainingEffects";
 import Score from "./components/Score";
 
+/**
+ * Main app component displays of user-specific training data
+ * across various components e.g DailyActivity, User statistics, and Cards.
+ * You can change the user from the dropdown.
+ */
+
 function App() {
   const [userId, setUserId] = useState(12);
 

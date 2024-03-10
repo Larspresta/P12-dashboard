@@ -4,6 +4,15 @@ import { GetUserPerformance } from "../../apiService";
 import styles from "./TrainingEffects.module.css";
 import PropTypes from "prop-types";
 
+/**
+ *User's performance data in a radar chart. Gets data from an api, based on the useriD
+ * 
+@component
+ * @param {Object} props - Component props.
+ * @param {number} props.userId - The ID of the user to get perfromance data
+ * @returns {React.ReactElement} Radar chart which visualizes the user's performance data in different gategories like strength, endurance etc.
+ */
+
 export default function TrainingEffects({ userId }) {
   const [performanceData, setPerformanceData] = useState(null);
 
@@ -13,9 +22,10 @@ export default function TrainingEffects({ userId }) {
         const { kind, data: performanceData } = response.data;
         console.log(kind, performanceData);
 
+        // Transform response to match the radar chart expectation
         const structuredData = performanceData.map((item) => ({
           ...item,
-          kind: kind[item.kind],
+          kind: kind[item.kind], // convert from number to corresponding string for the radar chart
         }));
 
         setPerformanceData(structuredData);

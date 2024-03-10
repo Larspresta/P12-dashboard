@@ -3,6 +3,13 @@ import styles from "./User.module.css";
 import PropTypes from "prop-types";
 import { GetUserMainInfo } from "../../apiService.js";
 
+/**
+ * Show welcome message and get user first name
+ * @param {object} props
+ * @param {number} props.userId ID to get user name
+ * @returns {React.ReactElement} Component to display user's name
+ */
+
 function User({ userId }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);

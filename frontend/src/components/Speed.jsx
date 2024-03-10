@@ -4,6 +4,14 @@ import styles from "./Speed.module.css";
 import { GetUserSessions } from "../../apiService";
 import PropTypes from "prop-types";
 
+/**
+ *
+ * @param {object} props
+ *  * @param {object} props.userId ID to get user nutrition data
+ *
+ * @returns {React.ReactElement} Component to display user weekly session's speed in an area chart
+ */
+
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -64,7 +72,7 @@ export default function Speed({ userId }) {
 }
 
 Speed.propTypes = {
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired, // required to get user data
 };
 
 CustomTooltip.propTypes = {

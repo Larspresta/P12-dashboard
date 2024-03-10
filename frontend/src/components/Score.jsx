@@ -6,6 +6,13 @@ import styles from "./Score.module.css";
 
 import PropTypes from "prop-types";
 
+/**
+ *
+ * @param {object} props
+ * @param {object} props.userId ID to get user nutrition data
+ * @returns {React.ReactElement} component with a radial bar chart to display user's reach of daily goal
+ */
+
 export default function Score({ userId }) {
   const [userScore, setUserScore] = useState(0);
 
