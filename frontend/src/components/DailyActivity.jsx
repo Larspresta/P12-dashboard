@@ -30,13 +30,13 @@ export default function DailyActivity({ userId }) {
       <h3>Daily activity</h3>
       <BarChart
         width={1100}
-        height={300}
+        height={340}
         data={data}
         margin={{
           top: 0,
           right: 0,
           left: 0,
-          bottom: 25,
+          bottom: 15,
         }}
       >
         <XAxis dataKey="day" tickFormatter={(value, index) => index + 1} tickLine={false} />
@@ -60,8 +60,8 @@ export default function DailyActivity({ userId }) {
           }}
           iconType="circle"
         />
-        <Bar yAxisId="left" dataKey="kilogram" fill="#282D30" barSize={10} />
-        <Bar yAxisId="right" dataKey="calories" fill="#E60000" barSize={10} />
+        <Bar yAxisId="left" dataKey="kilogram" name="Weight (kg)" fill="#282D30" barSize={10} />
+        <Bar yAxisId="right" dataKey="calories" name="Burned calories (kCal)" fill="#E60000" barSize={10} />
       </BarChart>
     </div>
   );

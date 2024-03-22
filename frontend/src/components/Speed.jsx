@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 /**
  *
  * @param {object} props
- *  * @param {object} props.userId ID to get user nutrition data
+ * @param {object} props.userId ID to get user nutrition data
  *
  * @returns {React.ReactElement} Component to display user weekly session's speed in an area chart
  */
